@@ -4,8 +4,6 @@
 
 ## 下载
 
-- **adb.srs**
-
 | 名称 | 链接 | Github 加速链接 |
 |------|------|----------------|
 | sing-box 广告规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/adb.srs) |
