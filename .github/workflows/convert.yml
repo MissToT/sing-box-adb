@@ -1,0 +1,81 @@
+name: Convert AdGuard Rules to sing-box
+
+on:
+  schedule:
+    # 每天北京时间 06:00 自动运行（UTC 22:00）
+    - cron: '0 22 * * *'
+  workflow_dispatch: # 支持手动触发
+  push:
+    branches:
+      - main
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download AdGuard rules from 10007
+        run: |
+          echo "⬇️ 正在下载 10007 广告规则..."
+          curl -fsSL "https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt" -o adb.txt
+          echo "✅ 下载完成，规则行数：$(wc -l < adb.txt)"
+
+      - name: Install sing-box
+        run: |
+          echo "📦 正在安装 sing-box..."
+          # 获取最新版本号
+          LATEST=$(curl -fsSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/')
+          echo "最新版本：$LATEST"
+          
+          curl -fsSL "https://github.com/SagerNet/sing-box/releases/latest/download/sing-box-${LATEST}-linux-amd64.tar.gz" \
+            -o sing-box.tar.gz
+          tar -xzf sing-box.tar.gz
+          sudo mv "sing-box-${LATEST}-linux-amd64/sing-box" /usr/local/bin/sing-box
+          sing-box version
+          echo "✅ sing-box 安装完成"
+
+      - name: Convert to sing-box rule-set (.srs binary)
+        run: |
+          echo "🔄 正在转换为 sing-box 二进制规则集..."
+          sing-box rule-set convert --type adguard --output adb.srs adb.txt
+          echo "✅ 二进制规则集生成完成：adb.srs（$(du -sh adb.srs | cut -f1)）"
+
+      - name: Generate metadata
+        run: |
+          echo "📝 生成元数据..."
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          SOURCE_LINES=$(wc -l < adb.txt)
+          SRS_SIZE=$(du -sh adb.srs | cut -f1)
+          
+          cat > metadata.json <<EOF
+          {
+            "updated_at": "${TIMESTAMP}",
+            "source": "https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt",
+            "source_lines": ${SOURCE_LINES},
+            "srs_size": "${SRS_SIZE}"
+          }
+          EOF
+          
+          echo "📊 转换统计："
+          cat metadata.json
+
+      - name: Commit and push updated rules
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add adb.srs adb.txt metadata.json
+          
+          if git diff --cached --quiet; then
+            echo "📭 规则无变化，跳过提交"
+          else
+            TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+            git commit -m "chore: 自动更新广告规则 [${TIMESTAMP}]"
+            git push
+            echo "🚀 规则已推送到仓库"
+          fi
