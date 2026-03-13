@@ -1,6 +1,8 @@
 {
-  "updated_at": "2026-03-13 04:27:08 UTC",
-  "source": "https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt",
-  "source_lines": 17635,
-  "srs_size": "120K"
+  "updated_at": "2026-03-13 04:35:20 UTC",
+  "files": {
+    "adb": { "source_lines": 17635, "srs_size": "120K" },
+    "all": { "source_lines": 16988, "srs_size": "108K" },
+    "reward": { "source_lines": 16916, "srs_size": "108K" }
+  }
 }
