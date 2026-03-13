@@ -4,14 +4,30 @@
 
 ## 下载
 
+- **adb.srs**（Adguard 规则）
+
 | 名称 | 链接 | Github 加速链接 |
 |------|------|----------------|
-| sing-box 规则 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/adb.srs) |
+| sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/adb.srs) |
 | Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/lingeringsound/10007/raw/refs/heads/main/adb.txt) |
+
+- **all.srs**（完整规则）
+
+| 名称 | 链接 | Github 加速链接 |
+|------|------|----------------|
+| sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/all.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/all.srs) |
+| Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/lingeringsound/10007/main/all) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/lingeringsound/10007/raw/refs/heads/main/all) |
+
+- **reward.srs**（保留广告奖励）
+
+| 名称 | 链接 | Github 加速链接 |
+|------|------|----------------|
+| sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/reward.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/reward.srs) |
+| Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/lingeringsound/10007/main/reward) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/lingeringsound/10007/raw/refs/heads/main/reward) |
 
 ## 在 sing-box 中使用
 
-在你的 `config.json` 中添加：
+在你的 `config.json` 中添加（以 `adb.srs` 为例）：
 
 ```json
 {
@@ -21,16 +37,14 @@
         "tag": "adb",
         "type": "remote",
         "format": "binary",
-        "update_interval": "24h",
-        "path": "./rules/adb.srs",
         "url": "https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs",
+        "download_detour": "direct"
       }
     ],
     "rules": [
       {
         "rule_set": "adb",
-        "action": "reject",
-        "method": "drop"
+        "outbound": "block"
       }
     ]
   }

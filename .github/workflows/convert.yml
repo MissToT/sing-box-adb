@@ -19,19 +19,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download AdGuard rules from 10007
+      - name: Download rules from 10007
         run: |
-          echo "⬇️ 正在下载 10007 广告规则..."
+          echo "⬇️ 正在下载 10007 规则..."
           curl -fsSL "https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt" -o adb.txt
-          echo "✅ 下载完成，规则行数：$(wc -l < adb.txt)"
+          echo "✅ adb.txt 下载完成，行数：$(wc -l < adb.txt)"
+          curl -fsSL "https://raw.githubusercontent.com/lingeringsound/10007/main/all" -o all.txt
+          echo "✅ all.txt 下载完成，行数：$(wc -l < all.txt)"
+          curl -fsSL "https://raw.githubusercontent.com/lingeringsound/10007/main/reward" -o reward.txt
+          echo "✅ reward.txt 下载完成，行数：$(wc -l < reward.txt)"
 
       - name: Install sing-box
         run: |
           echo "📦 正在安装 sing-box..."
-          # 获取最新版本号
           LATEST=$(curl -fsSL https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/')
           echo "最新版本：$LATEST"
-          
           curl -fsSL "https://github.com/SagerNet/sing-box/releases/latest/download/sing-box-${LATEST}-linux-amd64.tar.gz" \
             -o sing-box.tar.gz
           tar -xzf sing-box.tar.gz
@@ -41,26 +43,28 @@ jobs:
 
       - name: Convert to sing-box rule-set (.srs binary)
         run: |
-          echo "🔄 正在转换为 sing-box 二进制规则集..."
+          echo "🔄 正在转换规则集..."
           sing-box rule-set convert --type adguard --output adb.srs adb.txt
-          echo "✅ 二进制规则集生成完成：adb.srs（$(du -sh adb.srs | cut -f1)）"
+          echo "✅ adb.srs 生成完成（$(du -sh adb.srs | cut -f1)）"
+          sing-box rule-set convert --type adguard --output all.srs all.txt
+          echo "✅ all.srs 生成完成（$(du -sh all.srs | cut -f1)）"
+          sing-box rule-set convert --type adguard --output reward.srs reward.txt
+          echo "✅ reward.srs 生成完成（$(du -sh reward.srs | cut -f1)）"
 
       - name: Generate metadata
         run: |
           echo "📝 生成元数据..."
           TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
-          SOURCE_LINES=$(wc -l < adb.txt)
-          SRS_SIZE=$(du -sh adb.srs | cut -f1)
-          
-          cat > metadata.json <<EOF
+          cat > metadata.json <<METAEOF
           {
             "updated_at": "${TIMESTAMP}",
-            "source": "https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt",
-            "source_lines": ${SOURCE_LINES},
-            "srs_size": "${SRS_SIZE}"
+            "files": {
+              "adb": { "source_lines": $(wc -l < adb.txt), "srs_size": "$(du -sh adb.srs | cut -f1)" },
+              "all": { "source_lines": $(wc -l < all.txt), "srs_size": "$(du -sh all.srs | cut -f1)" },
+              "reward": { "source_lines": $(wc -l < reward.txt), "srs_size": "$(du -sh reward.srs | cut -f1)" }
+            }
           }
-          EOF
-          
+          METAEOF
           echo "📊 转换统计："
           cat metadata.json
 
@@ -68,9 +72,9 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add adb.srs adb.txt metadata.json
-          
+
+          git add adb.srs adb.txt all.srs all.txt reward.srs reward.txt metadata.json
+
           if git diff --cached --quiet; then
             echo "📭 规则无变化，跳过提交"
           else
