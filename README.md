@@ -37,14 +37,16 @@
         "tag": "adb",
         "type": "remote",
         "format": "binary",
+        "update_interval": "24h",
+        "path": "./rules/adb.srs",
         "url": "https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs",
-        "download_detour": "direct"
       }
     ],
     "rules": [
       {
         "rule_set": "adb",
-        "outbound": "block"
+        "action": "reject",
+        "method": "drop"
       }
     ]
   }
