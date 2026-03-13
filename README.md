@@ -9,6 +9,7 @@
 | 名称 | 链接 | Github 加速链接 |
 |------|------|----------------|
 | sing-box 广告规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/adb.srs) |
+| Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/lingeringsound/10007/main/adb.txt) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/lingeringsound/10007/raw/refs/heads/main/adb.txt) |
 
 ## 在 sing-box 中使用
 
