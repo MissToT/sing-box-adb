@@ -2,13 +2,13 @@
 
 自动将 [10007 大佬的广告规则](https://github.com/lingeringsound/10007) 转换为 sing-box `rule-set` 格式，每天自动更新。
 
-## 文件说明
+## 下载
 
-| 文件 | 说明 |
-|------|------|
-| `adb.srs` | sing-box 二进制规则集（直接使用） |
-| `adb.txt` | 原始 AdGuard 规则（来自 10007） |
-| `metadata.json` | 更新时间及统计信息 |
+- **adb.srs**
+
+| 名称 | 链接 | Github 加速链接 |
+|------|------|----------------|
+| sing-box 广告规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/adb.srs) |
 
 ## 在 sing-box 中使用
 
@@ -22,7 +22,7 @@
         "tag": "adb",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/<你的用户名>/<仓库名>/main/adb.srs",
+        "url": "https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adb.srs",
         "download_detour": "direct"
       }
     ],
