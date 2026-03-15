@@ -29,6 +29,14 @@ jobs:
           curl -fsSL "https://raw.githubusercontent.com/lingeringsound/10007/main/reward" -o reward.txt
           echo "✅ reward.txt 下载完成，行数：$(wc -l < reward.txt)"
 
+      - name: Download rules from anti-AD
+        run: |
+          echo "⬇️ 正在下载 anti-AD 规则..."
+          curl -fsSL "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt" -o anti-ad-adguard.txt
+          echo "✅ anti-ad-adguard.txt 下载完成，行数：$(wc -l < anti-ad-adguard.txt)"
+          curl -fsSL "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-easylist.txt" -o anti-ad-easylist.txt
+          echo "✅ anti-ad-easylist.txt 下载完成，行数：$(wc -l < anti-ad-easylist.txt)"
+
       - name: Install sing-box
         run: |
           echo "📦 正在安装 sing-box..."
@@ -50,6 +58,10 @@ jobs:
           echo "✅ all.srs 生成完成（$(du -sh all.srs | cut -f1)）"
           sing-box rule-set convert --type adguard --output reward.srs reward.txt
           echo "✅ reward.srs 生成完成（$(du -sh reward.srs | cut -f1)）"
+          sing-box rule-set convert --type adguard --output anti-ad-adguard.srs anti-ad-adguard.txt
+          echo "✅ anti-ad-adguard.srs 生成完成（$(du -sh anti-ad-adguard.srs | cut -f1)）"
+          sing-box rule-set convert --type adguard --output anti-ad-easylist.srs anti-ad-easylist.txt
+          echo "✅ anti-ad-easylist.srs 生成完成（$(du -sh anti-ad-easylist.srs | cut -f1)）"
 
       - name: Generate metadata
         run: |
@@ -61,7 +73,9 @@ jobs:
             "files": {
               "adb": { "source_lines": $(wc -l < adb.txt), "srs_size": "$(du -sh adb.srs | cut -f1)" },
               "all": { "source_lines": $(wc -l < all.txt), "srs_size": "$(du -sh all.srs | cut -f1)" },
-              "reward": { "source_lines": $(wc -l < reward.txt), "srs_size": "$(du -sh reward.srs | cut -f1)" }
+              "reward": { "source_lines": $(wc -l < reward.txt), "srs_size": "$(du -sh reward.srs | cut -f1)" },
+              "anti-ad-adguard": { "source_lines": $(wc -l < anti-ad-adguard.txt), "srs_size": "$(du -sh anti-ad-adguard.srs | cut -f1)" },
+              "anti-ad-easylist": { "source_lines": $(wc -l < anti-ad-easylist.txt), "srs_size": "$(du -sh anti-ad-easylist.srs | cut -f1)" }
             }
           }
           METAEOF
@@ -73,7 +87,10 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add adb.srs adb.txt all.srs all.txt reward.srs reward.txt metadata.json
+          git add adb.srs adb.txt all.srs all.txt reward.srs reward.txt \
+                  anti-ad-adguard.srs anti-ad-adguard.txt \
+                  anti-ad-easylist.srs anti-ad-easylist.txt \
+                  metadata.json
 
           if git diff --cached --quiet; then
             echo "📭 规则无变化，跳过提交"

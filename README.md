@@ -1,6 +1,6 @@
 # sing-box 广告规则集
 
-自动将 [10007 大佬的广告规则](https://github.com/lingeringsound/10007) 转换为 sing-box `rule-set` 格式，每天自动更新。
+自动将 [10007 大佬的广告规则](https://github.com/lingeringsound/10007) 以及 [anti-AD](https://github.com/privacy-protection-tools/anti-AD) 转换为 sing-box `rule-set` 格式，每天自动更新。
 
 ## 下载
 
@@ -24,6 +24,20 @@
 |------|------|----------------|
 | sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/reward.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/reward.srs) |
 | Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/lingeringsound/10007/main/reward) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/lingeringsound/10007/raw/refs/heads/main/reward) |
+
+- **anti-ad-adguard.srs**（anti-AD · AdGuard 格式，匹配整个URL的域名部分）
+
+| 名称 | 链接 | Github 加速链接 |
+|------|------|----------------|
+| sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/anti-ad-adguard.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/anti-ad-adguard.srs) |
+| Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-adguard.txt) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/privacy-protection-tools/anti-AD/raw/refs/heads/master/anti-ad-adguard.txt) |
+
+- **anti-ad-easylist.srs**（anti-AD · EasyList 格式，AdGuard Home DNS过滤）
+
+| 名称 | 链接 | Github 加速链接 |
+|------|------|----------------|
+| sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/anti-ad-easylist.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/anti-ad-easylist.srs) |
+| EasyList 规则 | [订阅链接](https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-easylist.txt) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/privacy-protection-tools/anti-AD/raw/refs/heads/master/anti-ad-easylist.txt) |
 
 ## 在 sing-box 中使用
 
@@ -55,7 +69,8 @@
 
 ## 规则来源
 
-- 上游规则：[lingeringsound/10007](https://github.com/lingeringsound/10007)
+- 上游规则（10007）：[lingeringsound/10007](https://github.com/lingeringsound/10007)
+- 上游规则（anti-AD）：[privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 - 转换工具：[SagerNet/sing-box](https://github.com/SagerNet/sing-box)
 
 ## 更新频率
