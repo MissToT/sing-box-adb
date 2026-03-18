@@ -1,6 +1,6 @@
 # sing-box 广告规则集
 
-自动将 [10007 大佬的广告规则](https://github.com/lingeringsound/10007) 以及 [anti-AD](https://github.com/privacy-protection-tools/anti-AD) 转换为 sing-box `rule-set` 格式，每天自动更新。
+自动将 [10007 大佬的广告规则](https://github.com/lingeringsound/10007)、[anti-AD](https://github.com/privacy-protection-tools/anti-AD) 以及 [Adblock-Rule-Collection](https://github.com/REIJI007/Adblock-Rule-Collection) 转换为 sing-box `rule-set` 格式，每天自动更新。
 
 ## 下载
 
@@ -39,6 +39,13 @@
 | sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/anti-ad-easylist.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/anti-ad-easylist.srs) |
 | EasyList 规则 | [订阅链接](https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-easylist.txt) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/privacy-protection-tools/anti-AD/raw/refs/heads/master/anti-ad-easylist.txt) |
 
+- **adblock-rule-collection.srs**（Adblock-Rule-Collection · 多源聚合规则）
+
+| 名称 | 链接 | Github 加速链接 |
+|------|------|----------------|
+| sing-box 规则集 | [订阅链接](https://raw.githubusercontent.com/MissToT/sing-box-adb/main/adblock-rule-collection.srs) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/MissToT/sing-box-adb/raw/refs/heads/main/adblock-rule-collection.srs) |
+| Adguard 规则 | [订阅链接](https://raw.githubusercontent.com/REIJI007/Adblock-Rule-Collection/main/ADBLOCK_RULE_COLLECTION.txt) | [Github 加速订阅链接](https://v6.gh-proxy.org/github.com/REIJI007/Adblock-Rule-Collection/raw/refs/heads/main/ADBLOCK_RULE_COLLECTION.txt) |
+
 ## 在 sing-box 中使用
 
 在你的 `config.json` 中添加（以 `adb.srs` 为例）：
@@ -71,6 +78,7 @@
 
 - 上游规则（10007）：[lingeringsound/10007](https://github.com/lingeringsound/10007)
 - 上游规则（anti-AD）：[privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
+- 上游规则（Adblock-Rule-Collection）：[REIJI007/Adblock-Rule-Collection](https://github.com/REIJI007/Adblock-Rule-Collection)
 - 转换工具：[SagerNet/sing-box](https://github.com/SagerNet/sing-box)
 
 ## 更新频率

@@ -37,6 +37,12 @@ jobs:
           curl -fsSL "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-easylist.txt" -o anti-ad-easylist.txt
           echo "✅ anti-ad-easylist.txt 下载完成，行数：$(wc -l < anti-ad-easylist.txt)"
 
+      - name: Download rules from Adblock-Rule-Collection
+        run: |
+          echo "⬇️ 正在下载 Adblock-Rule-Collection 规则..."
+          curl -fsSL "https://raw.githubusercontent.com/REIJI007/Adblock-Rule-Collection/main/ADBLOCK_RULE_COLLECTION.txt" -o adblock-rule-collection.txt
+          echo "✅ adblock-rule-collection.txt 下载完成，行数：$(wc -l < adblock-rule-collection.txt)"
+
       - name: Install sing-box
         run: |
           echo "📦 正在安装 sing-box..."
@@ -62,6 +68,8 @@ jobs:
           echo "✅ anti-ad-adguard.srs 生成完成（$(du -sh anti-ad-adguard.srs | cut -f1)）"
           sing-box rule-set convert --type adguard --output anti-ad-easylist.srs anti-ad-easylist.txt
           echo "✅ anti-ad-easylist.srs 生成完成（$(du -sh anti-ad-easylist.srs | cut -f1)）"
+          sing-box rule-set convert --type adguard --output adblock-rule-collection.srs adblock-rule-collection.txt
+          echo "✅ adblock-rule-collection.srs 生成完成（$(du -sh adblock-rule-collection.srs | cut -f1)）"
 
       - name: Generate metadata
         run: |
@@ -75,7 +83,8 @@ jobs:
               "all": { "source_lines": $(wc -l < all.txt), "srs_size": "$(du -sh all.srs | cut -f1)" },
               "reward": { "source_lines": $(wc -l < reward.txt), "srs_size": "$(du -sh reward.srs | cut -f1)" },
               "anti-ad-adguard": { "source_lines": $(wc -l < anti-ad-adguard.txt), "srs_size": "$(du -sh anti-ad-adguard.srs | cut -f1)" },
-              "anti-ad-easylist": { "source_lines": $(wc -l < anti-ad-easylist.txt), "srs_size": "$(du -sh anti-ad-easylist.srs | cut -f1)" }
+              "anti-ad-easylist": { "source_lines": $(wc -l < anti-ad-easylist.txt), "srs_size": "$(du -sh anti-ad-easylist.srs | cut -f1)" },
+              "adblock-rule-collection": { "source_lines": $(wc -l < adblock-rule-collection.txt), "srs_size": "$(du -sh adblock-rule-collection.srs | cut -f1)" }
             }
           }
           METAEOF
@@ -90,6 +99,7 @@ jobs:
           git add adb.srs adb.txt all.srs all.txt reward.srs reward.txt \
                   anti-ad-adguard.srs anti-ad-adguard.txt \
                   anti-ad-easylist.srs anti-ad-easylist.txt \
+                  adblock-rule-collection.srs adblock-rule-collection.txt \
                   metadata.json
 
           if git diff --cached --quiet; then
