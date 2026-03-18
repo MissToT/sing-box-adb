@@ -1,8 +1,10 @@
 {
-  "updated_at": "2026-03-14 22:30:31 UTC",
+  "updated_at": "2026-03-17 22:37:00 UTC",
   "files": {
-    "adb": { "source_lines": 17635, "srs_size": "120K" },
-    "all": { "source_lines": 16988, "srs_size": "108K" },
-    "reward": { "source_lines": 16916, "srs_size": "108K" }
+    "adb": { "source_lines": 17812, "srs_size": "120K" },
+    "all": { "source_lines": 17158, "srs_size": "108K" },
+    "reward": { "source_lines": 17086, "srs_size": "108K" },
+    "anti-ad-adguard": { "source_lines": 106223, "srs_size": "804K" },
+    "anti-ad-easylist": { "source_lines": 100665, "srs_size": "756K" }
   }
 }
