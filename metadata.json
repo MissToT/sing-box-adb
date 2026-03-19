@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-03-18 22:36:30 UTC",
+  "updated_at": "2026-03-19 22:33:02 UTC",
   "files": {
     "adb": { "source_lines": 17812, "srs_size": "120K" },
     "all": { "source_lines": 17158, "srs_size": "108K" },
     "reward": { "source_lines": 17086, "srs_size": "108K" },
-    "anti-ad-adguard": { "source_lines": 106223, "srs_size": "804K" },
-    "anti-ad-easylist": { "source_lines": 100665, "srs_size": "756K" },
-    "adblock-rule-collection": { "source_lines": 788174, "srs_size": "2.9M" }
+    "anti-ad-adguard": { "source_lines": 106707, "srs_size": "808K" },
+    "anti-ad-easylist": { "source_lines": 101149, "srs_size": "760K" },
+    "adblock-rule-collection": { "source_lines": 788546, "srs_size": "2.9M" }
   }
 }
